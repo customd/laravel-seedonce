@@ -1,13 +1,13 @@
 <?php
 
-namespace Ranium\SeedOnce;
+namespace CustomD\SeedOnce;
 
-use Ranium\SeedOnce\Commands\Status;
-use Illuminate\Support\ServiceProvider;
-use Ranium\SeedOnce\Commands\MarkSeeded;
+use CustomD\SeedOnce\Commands\MarkSeeded;
+use CustomD\SeedOnce\Commands\Status;
+use CustomD\SeedOnce\Repositories\DatabaseSeederRepository;
+use CustomD\SeedOnce\Repositories\SeederRepositoryInterface;
 use Illuminate\Contracts\Support\DeferrableProvider;
-use Ranium\SeedOnce\Repositories\DatabaseSeederRepository;
-use Ranium\SeedOnce\Repositories\SeederRepositoryInterface;
+use Illuminate\Support\ServiceProvider;
 
 class SeedOnceServiceProvider extends ServiceProvider implements DeferrableProvider
 {

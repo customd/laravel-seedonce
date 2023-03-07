@@ -1,11 +1,11 @@
 <?php
 
-namespace Ranium\SeedOnce\Commands;
+namespace CustomD\SeedOnce\Commands;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Console\ConfirmableTrait;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Collection;
 use Symfony\Component\Console\Input\InputOption;
-
 
 class MarkSeeded extends BaseCommand
 {
@@ -28,12 +28,12 @@ class MarkSeeded extends BaseCommand
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return int
      */
     public function handle()
     {
         if (! $this->confirmToProceed()) {
-            return;
+            return 0;
         }
 
         $this->resolver->setDefaultConnection($this->getDatabase());
@@ -46,31 +46,27 @@ class MarkSeeded extends BaseCommand
 
         $seeders = $this->getSeeders($this->option('class'));
 
-        $this->info(count($seeders) . ' seeder(s) will be marked as seeded');
+        $this->info(count($seeders).' seeder(s) will be marked as seeded');
 
         $this->mark($seeders);
 
         $this->info('Completed successfully.');
+
+        return 1;
     }
 
-    /**
-     * Mark/Log the seeder class
-     *
-     * @param array $seeders
-     * @return void
-     */
-    protected function mark($seeders)
+    protected function mark(Collection $seeders): void
     {
         $seeded = $this->repository->getSeeded();
 
         foreach ($seeders as $class) {
             $seeder = $this->container->make($class);
-            $this->getOutput()->writeln('<info>Marking: </info>' . $class);
+            $this->getOutput()->writeln('<info>Marking: </info>'.$class);
             if ($seeder instanceof Seeder && ! in_array($class, $seeded)) {
                 $this->repository->log($class);
-                $this->getOutput()->writeln('<comment>Marked: </comment>' . $class);
+                $this->getOutput()->writeln('<comment>Marked: </comment>'.$class);
             } else {
-                $this->getOutput()->writeln('<comment>Skipped: </comment>' . $class);
+                $this->getOutput()->writeln('<comment>Skipped: </comment>'.$class);
             }
         }
     }

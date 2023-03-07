@@ -1,8 +1,8 @@
 <?php
 
+use CustomD\SeedOnce\Traits\SeedOnce;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Ranium\SeedOnce\Traits\SeedOnce;
 
 class RolesTableSeeder extends Seeder
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Ranium\SeedOnce\Commands;
+namespace CustomD\SeedOnce\Commands;
 
 use Illuminate\Support\Collection;
 use Symfony\Component\Console\Input\InputOption;
@@ -24,7 +24,7 @@ class Status extends BaseCommand
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return int
      */
     public function handle()
     {
@@ -33,7 +33,7 @@ class Status extends BaseCommand
         if (! $this->repository->repositoryExists()) {
             $this->error('Seeders table not found. Please run migrate command first.');
 
-            return 1;
+            return 0;
         }
 
         $availableSeeders = $this->getSeeders('all');
@@ -45,16 +45,16 @@ class Status extends BaseCommand
         } else {
             $this->error('No seeders found');
         }
+
+        return 1;
     }
 
     /**
      * Get the status for the given seeded seeders
      *
-     * @param  array  $seeded
-     * @param  array  $availableSeeders
      * @return \Illuminate\Support\Collection
      */
-    protected function getStatusFor(array $seeded, Collection $availableSeeders)
+    protected function getStatusFor(array $seeded, Collection|array $availableSeeders)
     {
         return Collection::make($availableSeeders)
                     ->map(function ($seeder) use ($seeded) {

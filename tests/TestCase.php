@@ -1,16 +1,14 @@
 <?php
-namespace Ranium\SeedOnce\Test;
 
-use Ranium\SeedOnce\SeedOnceServiceProvider;
+namespace CustomD\SeedOnce\Test;
+
+use CustomD\SeedOnce\SeedOnceServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use Ranium\SeedOnce\Repositories\SeederRepositoryInterface;
 
 class TestCase extends BaseTestCase
 {
     /**
      * Set up test case
-     *
-     * @return void
      */
     public function setUp(): void
     {
@@ -22,8 +20,7 @@ class TestCase extends BaseTestCase
     /**
      * Load the package service providers
      *
-     * @param \Illuminate\Foundation\Application $app
-     *
+     * @param  \Illuminate\Foundation\Application  $app
      * @return void
      */
     protected function getPackageProviders($app)
@@ -37,7 +34,6 @@ class TestCase extends BaseTestCase
      * Define environment setup.
      *
      * @param  \Illuminate\Foundation\Application  $app
-     *
      * @return void
      */
     protected function getEnvironmentSetUp($app)
@@ -45,12 +41,12 @@ class TestCase extends BaseTestCase
         // Setup default database to use sqlite :memory:
         $app['config']->set('database.default', 'testing');
         $app['config']->set('database.connections.testing', [
-            'driver'   => 'sqlite',
+            'driver' => 'sqlite',
             'database' => ':memory:',
-            'prefix'   => '',
+            'prefix' => '',
         ]);
 
-        $app->useDatabasePath(__DIR__ . '/database');
+        $app->useDatabasePath(__DIR__.'/database');
     }
 
     /**
@@ -75,6 +71,6 @@ class TestCase extends BaseTestCase
         $this->artisan('migrate')->run();
 
         // Load migrations needed for testing this package
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
     }
 }

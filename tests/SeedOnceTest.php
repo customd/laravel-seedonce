@@ -1,5 +1,6 @@
 <?php
-namespace Ranium\SeedOnce\Test;
+
+namespace CustomD\SeedOnce\Test;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -18,11 +19,11 @@ class SeedOnceTest extends TestCase
         $this->artisan('db:seed')->run();
 
         $this->assertDatabaseHas('seeders', [
-            'seeder' => 'UsersTableSeeder'
+            'seeder' => 'UsersTableSeeder',
         ]);
 
         $this->assertDatabaseMissing('seeders', [
-            'seeder' => config('seedonce.database_seeder')
+            'seeder' => config('seedonce.database_seeder'),
         ]);
     }
 

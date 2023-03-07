@@ -1,11 +1,11 @@
 <?php
 
-namespace Ranium\SeedOnce\Traits;
+namespace CustomD\SeedOnce\Traits;
 
-use Ranium\SeedOnce\Repositories\SeederRepositoryInterface;
+use CustomD\SeedOnce\Repositories\SeederRepositoryInterface;
 
-trait SeedOnce {
-
+trait SeedOnce
+{
     /**
      * Seed the given connection from the given path.
      *
@@ -19,6 +19,7 @@ trait SeedOnce {
             if ($silent === false && isset($this->command)) {
                 $this->command->getOutput()->writeln("<info>Skipped:</info> {$class}");
             }
+
             return $this;
         }
 
@@ -52,8 +53,8 @@ trait SeedOnce {
     /**
      * Determine if this seeder class has already been seeded or not.
      *
-     * @param  string $class
-     * @return boolean
+     * @param  string  $class
+     * @return bool
      */
     protected function hasSeeded($class)
     {
@@ -66,7 +67,7 @@ trait SeedOnce {
     /**
      * Mark the current class as seeded
      *
-     * @param  string $class
+     * @param  string  $class
      * @return void
      */
     protected function markSeeded($class)
@@ -82,7 +83,7 @@ trait SeedOnce {
     /**
      * Get the instance of seeder repository
      *
-     * @return \Ranium\SeedOnce\Repositories\SeederRepositoryInterface
+     * @return \CustomD\SeedOnce\Repositories\SeederRepositoryInterface
      */
     protected function repository()
     {

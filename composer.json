@@ -1,23 +1,25 @@
 {
-    "name": "ranium/laravel-seedonce",
+    "name": "custom-d/laravel-seedonce",
     "description": "Laravel package to run seeders only once",
     "type": "library",
     "require": {
-        "php": "^7.2|^8.0",
-        "illuminate/database": "^6.0|^7.0|^8.0|^9.0"
+        "php": "^8.1",
+        "illuminate/database": "^10.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^3.8|^4.0|^5.0|^6.0|^7.0",
-        "phpunit/phpunit": "^8.0|^9.0"
+        "nunomaduro/larastan": "^2.0",
+        "orchestra/testbench": "^8.0",
+        "phpunit/phpunit": "^10.0",
+        "laravel/pint": "^1.6"
     },
     "autoload": {
         "psr-4": {
-            "Ranium\\SeedOnce\\": "src"
+            "CustomD\\SeedOnce\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Ranium\\SeedOnce\\Test\\": "tests"
+            "CustomD\\SeedOnce\\Test\\": "tests"
         },
         "classmap": [
             "tests/database/seeds"
@@ -26,24 +28,30 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Ranium\\SeedOnce\\SeedOnceServiceProvider"
+                "CustomD\\SeedOnce\\SeedOnceServiceProvider"
             ]
         }
     },
     "license": "MIT",
     "authors": [
         {
+            "name": "Craig Smith",
+            "email": "craig.smith@customd.com",
+            "homepage": "https://customd.com",
+            "role": "Forked Developer"
+        },
+        {
             "name": "Abbas Ali",
             "email": "abbas@ranium.in",
             "homepage": "https://ranium.in",
-            "role": "Developer"
+            "role": "Orignal Developer"
         }
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-      "test": [
-        "./vendor/bin/phpunit"
-      ]
+        "phpunit": "phpunit",
+        "phpstan": "phpstan",
+        "pint": "pint"
     }
 }

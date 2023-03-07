@@ -1,14 +1,14 @@
 <?php
 
-namespace Ranium\SeedOnce\Commands;
+namespace CustomD\SeedOnce\Commands;
 
-use Illuminate\Support\Str;
+use CustomD\SeedOnce\Repositories\SeederRepositoryInterface as Repository;
 use Illuminate\Console\Command;
-use Illuminate\Support\Collection;
 use Illuminate\Container\Container;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Database\ConnectionResolverInterface as Resolver;
-use Ranium\SeedOnce\Repositories\SeederRepositoryInterface as Repository;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class BaseCommand extends Command
 {
@@ -36,17 +36,13 @@ class BaseCommand extends Command
     /**
      * Seeder repository
      *
-     * @var \Ranium\SeedOnce\Repositories\SeederRepositoryInterface
+     * @var \CustomD\SeedOnce\Repositories\SeederRepositoryInterface
      */
     protected $repository;
 
     /**
      * Create a new database seed command instance.
      *
-     * @param  \Illuminate\Database\ConnectionResolverInterface  $resolver
-     * @param  \Illuminate\Filesystem\Filesystem $files
-     * @param  \Illuminate\Container\Container $container
-     * @param  \Ranium\SeedOnce\Repositories\SeederRepositoryInterface $repository
      * @return void
      */
     public function __construct(Resolver $resolver,
@@ -66,17 +62,17 @@ class BaseCommand extends Command
      * Get the seeders to mark as seeded.
      * NOTE: Main Database Seeder is always excluded.
      *
-     * @param string $classOption Which class to get. "all" for all classes.
-     * @return array
+     * @param  string  $classOption Which class to get. "all" for all classes.
+     * @return Collection<(int|string), string>
      */
     protected function getSeeders($classOption = 'all')
     {
         // Read all files from the database/seeds directory
         $seedersPath = $this->getSeederFolder();
 
-        return Collection::make($seedersPath)
+        return Collection::make([$seedersPath])
             ->flatMap(function ($path) {
-                return Str::endsWith($path, '.php') ? [$path] : $this->files->glob($path .'*.php');
+                return Str::endsWith($path, '.php') ? [$path] : $this->files->glob($path.'*.php');
             })
             ->map(function ($path) {
                 return $this->getSeederName($path);
@@ -97,7 +93,7 @@ class BaseCommand extends Command
      */
     protected function getSeederName($path)
     {
-        return $this->getSeederNamespace() . str_replace('.php', '', class_basename($path));
+        return $this->getSeederNamespace().str_replace('.php', '', class_basename($path));
     }
 
     /**
@@ -117,7 +113,7 @@ class BaseCommand extends Command
      */
     protected function getSeederFolder()
     {
-        return $this->laravel->databasePath() . DIRECTORY_SEPARATOR . config('seedonce.folder_seeder') . DIRECTORY_SEPARATOR;
+        return $this->laravel->databasePath().DIRECTORY_SEPARATOR.config('seedonce.folder_seeder').DIRECTORY_SEPARATOR;
     }
 
     /**

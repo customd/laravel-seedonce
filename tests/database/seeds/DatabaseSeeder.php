@@ -1,7 +1,7 @@
 <?php
 
+use CustomD\SeedOnce\Traits\SeedOnce;
 use Illuminate\Database\Seeder;
-use Ranium\SeedOnce\Traits\SeedOnce;
 
 class DatabaseSeeder extends Seeder
 {

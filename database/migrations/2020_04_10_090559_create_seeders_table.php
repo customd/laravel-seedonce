@@ -15,7 +15,7 @@ class CreateSeedersTable extends Migration
 
     /**
      * Set the table name in the constructor
-     * 
+     *
      * @return void
      */
     public function __construct()

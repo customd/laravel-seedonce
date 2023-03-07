@@ -1,8 +1,8 @@
 <?php
 
+use CustomD\SeedOnce\Traits\SeedOnce;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Ranium\SeedOnce\Traits\SeedOnce;
 
 class UsersTableSeeder extends Seeder
 {
@@ -17,8 +17,8 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => 'Test User',
-            'email' => 'test@ranium.in',
-            'password' => bcrypt('password')
+            'email' => 'test@customd.com',
+            'password' => bcrypt('password'),
         ]);
     }
 }

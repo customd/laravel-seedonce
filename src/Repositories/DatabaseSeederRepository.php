@@ -1,6 +1,6 @@
 <?php
 
-namespace Ranium\SeedOnce\Repositories;
+namespace CustomD\SeedOnce\Repositories;
 
 use Illuminate\Database\ConnectionResolverInterface as Resolver;
 
@@ -23,7 +23,6 @@ class DatabaseSeederRepository implements SeederRepositoryInterface
     /**
      * Create a new database seeder repository instance.
      *
-     * @param  \Illuminate\Database\ConnectionResolverInterface  $resolver
      * @param  string  $table
      * @return void
      */
@@ -82,7 +81,7 @@ class DatabaseSeederRepository implements SeederRepositoryInterface
     /**
      * Resolve the database connection instance.
      *
-     * @return \Illuminate\Database\Connection
+     * @return \Illuminate\Database\Connection|\Illuminate\Database\ConnectionInterface
      */
     public function getConnection()
     {
@@ -96,7 +95,7 @@ class DatabaseSeederRepository implements SeederRepositoryInterface
      */
     public function repositoryExists()
     {
-        $schema = $this->getConnection()->getSchemaBuilder();
+        $schema = $this->getConnection()->getSchemaBuilder(); //@phpstan-ignore-line
 
         return $schema->hasTable($this->table);
     }

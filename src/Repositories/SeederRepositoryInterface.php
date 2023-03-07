@@ -1,6 +1,6 @@
 <?php
 
-namespace Ranium\SeedOnce\Repositories;
+namespace CustomD\SeedOnce\Repositories;
 
 interface SeederRepositoryInterface
 {
@@ -33,5 +33,4 @@ interface SeederRepositoryInterface
      * @return bool
      */
     public function repositoryExists();
-
 }

@@ -1,5 +1,6 @@
 <?php
-namespace Ranium\SeedOnce\Test;
+
+namespace CustomD\SeedOnce\Test;
 
 class MarkSeededTest extends TestCase
 {
@@ -14,11 +15,11 @@ class MarkSeededTest extends TestCase
         $this->artisan('seedonce:mark-seeded')->run();
 
         $this->assertDatabaseHas('seeders', [
-            'seeder' => 'UsersTableSeeder'
+            'seeder' => 'UsersTableSeeder',
         ]);
 
         $this->assertDatabaseHas('seeders', [
-            'seeder' => 'RolesTableSeeder'
+            'seeder' => 'RolesTableSeeder',
         ]);
     }
 
@@ -28,11 +29,11 @@ class MarkSeededTest extends TestCase
         $this->artisan('seedonce:mark-seeded', ['--class' => 'UsersTableSeeder'])->run();
 
         $this->assertDatabaseHas('seeders', [
-            'seeder' => 'UsersTableSeeder'
+            'seeder' => 'UsersTableSeeder',
         ]);
 
         $this->assertDatabaseMissing('seeders', [
-            'seeder' => 'RolesTableSeeder'
+            'seeder' => 'RolesTableSeeder',
         ]);
     }
 }
